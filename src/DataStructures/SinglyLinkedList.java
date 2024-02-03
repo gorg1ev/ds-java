@@ -181,11 +181,15 @@ public class SinglyLinkedList<T> {
     if (index < 0 || index >= size)
       throw new RuntimeException("Illegal Index.");
 
-    Node<T> trav = head;
-    for (int i = 0; i < size - 1; i++) {
-      if (i == index)
-        break;
 
+    if (index == 0)
+      return getHead();
+
+    if (index == size - 1)
+      return getTail();
+
+    Node<T> trav = head;
+    for (int i = 1; i <= index; i++) {
       trav = trav.next;
     }
 
