@@ -81,15 +81,18 @@ public class SinglyLinkedList<T> {
   }
 
   public void unShift() throws Exception {
-    if (head == null)
+    if (isEmpty())
       throw new Exception("List is empty.");
 
     head = head.next;
     size--;
+
+    if (isEmpty())
+      tail = null;
   }
 
   public void pop() throws Exception {
-    if (head == null)
+    if (isEmpty())
       throw new Exception("List is empty.");
 
     Node<T> prevLast = head;
@@ -100,6 +103,9 @@ public class SinglyLinkedList<T> {
     prevLast.next = null;
     tail = prevLast;
     size--;
+
+    if (isEmpty())
+      tail = null;
   }
 
   public void remove(int index) throws Exception {
