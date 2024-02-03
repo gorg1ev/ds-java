@@ -19,6 +19,8 @@ public class SinglyLinkedList<T> {
     }
 
     public Node<T> getNextNode() {
+      if (next == null)
+        throw new RuntimeException("There is no next node");
       return next;
     }
 
@@ -56,9 +58,9 @@ public class SinglyLinkedList<T> {
     size++;
   }
 
-  public void insert(int index, T data) throws Exception {
+  public void insert(int index, T data) {
     if (index < 0 || index > size)
-      throw new Exception("Illegal Index.");
+      throw new RuntimeException("Illegal Index.");
 
     if (index == 0) {
       shift(data);
@@ -80,77 +82,84 @@ public class SinglyLinkedList<T> {
     size++;
   }
 
-  public void unShift() throws Exception {
+  public T unShift() {
     if (isEmpty())
-      throw new Exception("List is empty.");
+      throw new RuntimeException("List is empty.");
 
+    T data = head.data;
     head = head.next;
     size--;
 
     if (isEmpty())
       tail = null;
+
+    return data;
   }
 
-  public void pop() throws Exception {
+  public T pop() {
     if (isEmpty())
-      throw new Exception("List is empty.");
+      throw new RuntimeException("List is empty.");
 
     Node<T> prevLast = head;
 
     for (int i = 0; i < size - 2; i++) {
       prevLast = prevLast.next;
     }
+    T data = prevLast.next.data;
     prevLast.next = null;
     tail = prevLast;
     size--;
 
     if (isEmpty())
       tail = null;
+
+    return data;
   }
 
-  public void remove(int index) throws Exception {
+  public T remove(int index) {
     if (index < 0 || index >= size) {
-      throw new Exception("Illegal Index.");
+      throw new RuntimeException("Illegal Index.");
     }
 
-    if (index == 0) {
+    if (isEmpty())
+      throw new RuntimeException("List is empty");
+
+    if (index == 0)
       unShift();
-      return;
-    }
 
-    if (index == size - 1) {
+    if (index == size - 1)
       pop();
-      return;
-    }
 
-    Node<T> prevNode = head;
-    for (int i = 0; i < index - 1; i++) {
-      prevNode = prevNode.next;
-    }
+    Node<T> prevNode = at(index - 1);
+    T data = prevNode.next.data;
 
     prevNode.next = prevNode.next.next;
     size--;
+
+    return data;
   }
 
   public Node<T> getHead() {
+    if (isEmpty())
+      throw new RuntimeException("List is empty");
+
     return head;
   }
 
   public Node<T> getTail() {
+    if (isEmpty())
+      throw new RuntimeException("List is empty");
+
     return tail;
   }
 
-  public T getHeadValue() {
-    return head.data;
-  }
+  public int indexOf(T elm) {
+    if (isEmpty())
+      throw new RuntimeException("List is empty");
 
-  public T getTailValue() {
-    return tail.data;
-  }
-
-  public int indexOf(T elm) throws Exception {
     if (elm == null)
-      throw new Exception("None");
+      throw new RuntimeException("None");
+
 
     int index = 0;
     Node<T> trev = head;
@@ -165,9 +174,12 @@ public class SinglyLinkedList<T> {
     return index;
   }
 
-  public Node<T> at(int index) throws Exception {
+  public Node<T> at(int index) {
+    if (isEmpty())
+      throw new RuntimeException("List is empty");
+
     if (index < 0 || index >= size)
-      throw new Exception("Illegal Index.");
+      throw new RuntimeException("Illegal Index.");
 
     Node<T> trev = head;
     for (int i = 0; i < size - 1; i++) {
@@ -181,6 +193,9 @@ public class SinglyLinkedList<T> {
   }
 
   public void reverse() {
+    if (isEmpty())
+      throw new RuntimeException("List is empty");
+
     tail = head;
     Node<T> current = head;
     Node<T> prev = null;
@@ -197,6 +212,9 @@ public class SinglyLinkedList<T> {
   }
 
   public void clear() {
+    if (isEmpty())
+      throw new RuntimeException("List is empty");
+
     Node<T> trev = head;
 
     while (trev != null) {
