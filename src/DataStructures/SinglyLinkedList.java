@@ -25,7 +25,7 @@ public class SinglyLinkedList<T> {
     }
 
     public T getNextValue(Node<T> node) {
-      return node.getValue();
+      return node.next.getValue();
     }
   }
 
