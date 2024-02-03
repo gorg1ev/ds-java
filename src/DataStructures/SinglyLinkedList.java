@@ -162,12 +162,12 @@ public class SinglyLinkedList<T> {
 
 
     int index = 0;
-    Node<T> trev = head;
-    while (trev != null) {
-      if (trev.data.equals(elm))
+    Node<T> trav = head;
+    while (trav != null) {
+      if (trav.data.equals(elm))
         break;
 
-      trev = trev.next;
+      trav = trav.next;
       index++;
     }
 
@@ -181,15 +181,15 @@ public class SinglyLinkedList<T> {
     if (index < 0 || index >= size)
       throw new RuntimeException("Illegal Index.");
 
-    Node<T> trev = head;
+    Node<T> trav = head;
     for (int i = 0; i < size - 1; i++) {
       if (i == index)
         break;
 
-      trev = trev.next;
+      trav = trav.next;
     }
 
-    return trev;
+    return trav;
   }
 
   public void reverse() {
@@ -215,13 +215,13 @@ public class SinglyLinkedList<T> {
     if (isEmpty())
       throw new RuntimeException("List is empty");
 
-    Node<T> trev = head;
+    Node<T> trav = head;
 
-    while (trev != null) {
-      Node<T> next = trev.next;
-      trev.data = null;
-      trev.next = null;
-      trev = next;
+    while (trav != null) {
+      Node<T> next = trav.next;
+      trav.data = null;
+      trav.next = null;
+      trav = next;
     }
     head = tail = null;
     size = 0;
