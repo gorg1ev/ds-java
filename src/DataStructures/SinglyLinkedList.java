@@ -157,11 +157,7 @@ public class SinglyLinkedList<T> {
     if (isEmpty())
       throw new RuntimeException("List is empty");
 
-    if (elm == null)
-      throw new RuntimeException("None");
-
-
-    int index = 0;
+    int index = -1;
     Node<T> trav = head;
     while (trav != null) {
       if (trav.data.equals(elm))
