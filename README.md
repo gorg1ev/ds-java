@@ -7,6 +7,7 @@ Data structures are the foundation of computer science, providing efficient ways
 1. **Singly Linked List:** Implementation of a singly linked list.
 2. **Doubly Linked List:** Implementation of a doubly linked list.
 3. **Stack:** Implementation of a stack.
+4. **Queue:** Implementation of a queue.
 
 This list will be expanded with more data structures.
 
